@@ -3,3 +3,6 @@
 *.pxt
 *.uxp
 *.uxt
+/nbproject/private/
+/build/
+/dist/
