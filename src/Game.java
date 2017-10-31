@@ -111,6 +111,12 @@ public class Game
         else if (commandWord.equals("go")) {
             goRoom(command);
         }
+        else if (commandWord.equals("look")){
+            printLocationInfo();
+        }
+        else if (commandWord.equals("eat")) {
+            eat();
+        }
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }
@@ -176,9 +182,21 @@ public class Game
         }
     }
     
+    /**
+     * Prints out the description and exits of the current room
+     */
     private void printLocationInfo()
     {
         System.out.println(currentRoom.getLongDescription());
         System.out.println();
     }
+
+    /**
+     * Currently only prints out a string
+     */
+    private void eat()
+    {
+        System.out.println("You have eaten, and not hungry anymore");
+    }
+    
 }
