@@ -39,5 +39,9 @@ public class Item
         this.weight = weight;
     }
     
+    public String getLongDescription()
+    {
+        return description + ", and it weights: " + Integer.toString(weight);
+    }
     
 }

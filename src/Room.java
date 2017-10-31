@@ -1,5 +1,7 @@
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Class Room - a room in an adventure game.
@@ -19,7 +21,7 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> exits;
-    private Item item;
+    private List<Item> items;
     
     public Room getExit(String direction)
     {
@@ -36,6 +38,7 @@ public class Room
     {
         this.description = description;
         exits = new HashMap<String, Room>();
+        items = new ArrayList();
     }
     
     /**
@@ -43,13 +46,7 @@ public class Room
      */
     public void addItem(String description, int weight)
     {
-        if (item != null)
-        {
-            System.out.println("Item is already defined");
-            return;
-        }
-        
-        item = new Item(description, weight);
+        items.add(new Item(description, weight));
     }
     
     /**
@@ -86,6 +83,22 @@ public class Room
     }
     
     /**
+     * Returns the descriptions of all the items located in this room
+     * @return 
+     */
+    private String getItemDescriptions()
+    {
+        String itemsDescriptions = "";
+        
+        for (Item item : items)
+        {
+            itemsDescriptions += item.getLongDescription() + "\n";
+        }
+        
+        return itemsDescriptions;
+    }
+    
+    /**
      * Return a long description of this room, of the form:
      * You are in the <Room>.
      * Exits: <Exits>
@@ -93,7 +106,7 @@ public class Room
      */
     public String getLongDescription()
     {
-        return "You are in the " + description + ".\n" + "The item in this room is: " + item.getDescription() + ", and it weights " + Integer.toString(item.getWeight()) + ". \n" + getExitString();
+        return "You are in the " + description + "\n" + "Items in this room: \n" + getItemDescriptions() + "\n" + getExitString();
     }
 
 }

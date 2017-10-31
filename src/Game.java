@@ -48,6 +48,7 @@ public class Game
         outside.setExit("south", lab);
         outside.setExit("west", pub);
         outside.addItem("A rock", 2);
+        outside.addItem("A stick", 1);
         
         theater.setExit("west", outside);
         theater.addItem("A costume", 5);
