@@ -19,7 +19,8 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> exits;
-
+    private Item item;
+    
     public Room getExit(String direction)
     {
         return exits.get(direction);
@@ -36,7 +37,21 @@ public class Room
         this.description = description;
         exits = new HashMap<String, Room>();
     }
-
+    
+    /**
+     * Adds an item to the room
+     */
+    public void addItem(String description, int weight)
+    {
+        if (item != null)
+        {
+            System.out.println("Item is already defined");
+            return;
+        }
+        
+        item = new Item(description, weight);
+    }
+    
     /**
      * Define an exit from this room
      * @param direction The direction of the exit
@@ -78,7 +93,7 @@ public class Room
      */
     public String getLongDescription()
     {
-        return "You are in the " + description + ".\n" + getExitString();
+        return "You are in the " + description + ".\n" + "The item in this room is: " + item.getDescription() + ", and it weights " + Integer.toString(item.getWeight()) + ". \n" + getExitString();
     }
 
 }

@@ -47,15 +47,21 @@ public class Game
         outside.setExit("east", theater);
         outside.setExit("south", lab);
         outside.setExit("west", pub);
+        outside.addItem("A rock", 2);
         
         theater.setExit("west", outside);
+        theater.addItem("A costume", 5);
         
         pub.setExit("east", outside);
+        pub.addItem("A bottle of beer", 1);
         
         lab.setExit("north", outside);
         lab.setExit("east", office);
+        lab.addItem("A microscope", 3);
         
         office.setExit("west", lab);
+        office.addItem("A clipboard", 1);
+        
         currentRoom = outside;  // start game outside
     }
 
