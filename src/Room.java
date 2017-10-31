@@ -69,5 +69,16 @@ public class Room
         
         return exitString;
     }
+    
+    /**
+     * Return a long description of this room, of the form:
+     * You are in the <Room>.
+     * Exits: <Exits>
+     * @return A description of the room, including exits.
+     */
+    public String getLongDescription()
+    {
+        return "You are in the " + description + ".\n" + getExitString();
+    }
 
 }
