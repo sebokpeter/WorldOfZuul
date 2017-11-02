@@ -1,4 +1,6 @@
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -132,6 +134,12 @@ public class Game
         else if (commandWord.equals("back")) {
             goBack(command);
         }
+        else if (commandWord.equals("take")) {
+            takeItem(command);
+        }
+        else if (commandWord.equals("drop")) {
+            dropItem(command);
+        }
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }
@@ -231,5 +239,48 @@ public class Game
         player.setCurrentRoom(path.pop());
         printLocationInfo();
     }
+
+    private void takeItem(Command command)
+    {
+        if (!command.hasSecondWord())
+        {
+            System.out.println("Take what?");
+            return;
+        }
+        List<Item> items = player.getCurrentRoom().getItems();
+        
+        for (Item item : items)
+        {
+            if (item.getName().toLowerCase().equals(command.getSecondWord().toLowerCase()))
+            {
+                player.pickUpItem(item);
+                player.getCurrentRoom().removeItem(item);
+                return;
+            }
+        }
+        
+        System.out.println("There is no such item");
+    }
+
+    private void dropItem(Command command)
+    {
+        if (!command.hasSecondWord())
+        {
+            System.out.println("Take what?");
+            return;
+        }
+        List<Item> items = player.getHeldItems();
+        
+        for (Item item : items)
+        {
+            if (item.getName().toLowerCase().equals(command.getSecondWord().toLowerCase()))
+            {
+                player.removeItem(item);
+                player.getCurrentRoom().addItem(item.getName(), item.getDescription(), item.getWeight());
+                return;
+            }
+        }
+        
+        System.out.println("There is no such item");    }
     
 }

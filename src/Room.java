@@ -82,6 +82,8 @@ public class Room
         return exitString;
     }
     
+   
+    
     /**
      * Returns the descriptions of all the items located in this room
      * @return 
@@ -107,6 +109,16 @@ public class Room
     public String getLongDescription()
     {
         return "You are in the " + description + "\n" + "Items in this room: \n" + getItemDescriptions() + "\n" + getExitString();
+    }
+    
+    public List<Item> getItems()
+    {
+        return this.items;
+    }
+    
+    public void removeItem(Item item)
+    {
+        this.items.remove(item);
     }
 
 }

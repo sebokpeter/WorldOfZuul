@@ -31,4 +31,13 @@ public class Item
         return description + ", and it weights: " + Integer.toString(weight);
     }
     
+    public String getDescription()
+    {
+        return this.description;
+    }
+    
+    public int getWeight()
+    {
+        return this.weight;
+    }
 }
