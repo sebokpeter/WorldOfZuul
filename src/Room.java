@@ -44,9 +44,9 @@ public class Room
     /**
      * Adds an item to the room
      */
-    public void addItem(String description, int weight)
+    public void addItem(String name, String description, int weight)
     {
-        items.add(new Item(description, weight));
+        items.add(new Item(name, description, weight));
     }
     
     /**

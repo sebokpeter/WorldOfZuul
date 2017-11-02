@@ -21,13 +21,14 @@ import java.util.Stack;
 public class Game 
 {
     private Parser parser;
-    private Room currentRoom;
+    Player player;
     private Stack<Room> path;
     /**
      * Create the game and initialise its internal map.
      */
     public Game() 
     {
+        player = new Player("Player");
         createRooms();
         parser = new Parser();
         path = new Stack<>();
@@ -51,23 +52,23 @@ public class Game
         outside.setExit("east", theater);
         outside.setExit("south", lab);
         outside.setExit("west", pub);
-        outside.addItem("A rock", 2);
-        outside.addItem("A stick", 1);
+        outside.addItem("Rock", "A rock", 2);
+        outside.addItem("Stick", "A stick", 1);
         
         theater.setExit("west", outside);
-        theater.addItem("A costume", 5);
+        theater.addItem("Costume", "A costume", 5);
         
         pub.setExit("east", outside);
-        pub.addItem("A bottle of beer", 1);
+        pub.addItem("Beer", "A bottle of beer", 1);
         
         lab.setExit("north", outside);
         lab.setExit("east", office);
-        lab.addItem("A microscope", 3);
+        lab.addItem("Microscope", "A microscope", 3);
         
         office.setExit("west", lab);
-        office.addItem("A clipboard", 1);
+        office.addItem("Clipboard" ,"A clipboard", 1);
         
-        currentRoom = outside;  // start game outside
+        player.setCurrentRoom(outside);  // start game outside
     }
 
     /**
@@ -169,14 +170,14 @@ public class Game
         String direction = command.getSecondWord();
 
         // Try to leave current room.
-        Room nextRoom = currentRoom.getExit(direction);
+        Room nextRoom = player.getCurrentRoom().getExit(direction);
         
         if (nextRoom == null) {
             System.out.println("There is no door!");
         }
         else {
-            path.push(currentRoom);
-            currentRoom = nextRoom;
+            path.push(player.getCurrentRoom());
+            player.setCurrentRoom(nextRoom);
             printLocationInfo();
         }
     }
@@ -202,7 +203,7 @@ public class Game
      */
     private void printLocationInfo()
     {
-        System.out.println(currentRoom.getLongDescription());
+        System.out.println(player.getCurrentRoom().getLongDescription());
         System.out.println();
     }
 
@@ -227,7 +228,7 @@ public class Game
             return;
         }
         
-        currentRoom = path.pop();
+        player.setCurrentRoom(path.pop());
         printLocationInfo();
     }
     

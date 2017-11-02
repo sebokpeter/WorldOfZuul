@@ -10,33 +10,20 @@
  */
 public class Item
 {
+    private String name;
     private String description;
     private int weight;
 
-    public Item(String description, int weight)
+    public Item(String name, String description, int weight)
     {
+        this.name = name;
         this.description = description;
         this.weight = weight;
     }
-
-    public String getDescription()
+    
+    public String getName()
     {
-        return description;
-    }
-
-    public void setDescription(String description)
-    {
-        this.description = description;
-    }
-
-    public int getWeight()
-    {
-        return weight;
-    }
-
-    public void setWeight(int weight)
-    {
-        this.weight = weight;
+        return this.name;
     }
     
     public String getLongDescription()
