@@ -17,7 +17,7 @@ public class Player
     private Room currentRoom;
     private String name;
     private List<Item> heldItems;
-    private final int maxWeight = 15;
+    private int maxWeight = 15;
     private int weight;
     
     public Player(String name)
@@ -43,13 +43,20 @@ public class Player
         return this.name;
     }
     
+    public boolean hasItem(String name)
+    {
+        for (Item heldItem : heldItems)
+        {
+            if (heldItem.getName().toLowerCase().equals(name.toLowerCase()))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public void pickUpItem(Item item)
     {
-        if (heldItems.contains(item))
-        {
-            System.out.println("You already have this item!");
-        }
-
         weight+= item.getWeight();
         heldItems.add(item);
         System.out.println("You now have: " + item.getName());
@@ -81,5 +88,10 @@ public class Player
             System.out.println("\t" + heldItem.getName() + "\t" + heldItem.getDescription() + "     \t" + Integer.toString(heldItem.getWeight()));
         }
         System.out.println("Total weight: " + Integer.toString(weight) + "/" + Integer.toString(maxWeight));
+    }
+    
+    public void addToWeightLimit(int increase)
+    {
+        this.maxWeight += increase;
     }
 }

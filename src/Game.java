@@ -67,6 +67,7 @@ public class Game
         lab.setExit("north", outside);
         lab.setExit("east", office);
         lab.addItem("Microscope", "A microscope", 3);
+        lab.addItem("Cookie", "A magical cookie", 0);
         
         office.setExit("west", lab);
         office.addItem("Clipboard" ,"A clipboard", 1);
@@ -130,7 +131,7 @@ public class Game
             printLocationInfo();
         }
         else if (commandWord.equals("eat")) {
-            eat();
+            eat(command);
         }
         else if (commandWord.equals("back")) {
             goBack(command);
@@ -222,9 +223,25 @@ public class Game
     /**
      * Currently only prints out a string
      */
-    private void eat()
+    private void eat(Command command)
     {
-        System.out.println("You have eaten, and not hungry anymore");
+        if (!command.hasSecondWord())
+        {
+            System.out.println("You have eaten, and not hungry anymore");
+            return;
+        }
+        
+        if (command.getSecondWord().equals("cookie"))
+        {
+            if (player.hasItem("cookie"))
+            {
+                player.addToWeightLimit(5);
+                System.out.println("You have become stronger!");
+                return;
+            }
+        }
+        
+        System.out.println("I dont know what to eat");
     }
 
     private void goBack(Command command)
