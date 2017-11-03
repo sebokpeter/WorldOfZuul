@@ -55,6 +55,7 @@ public class Game
         outside.setExit("south", lab);
         outside.setExit("west", pub);
         outside.addItem("Rock", "A rock", 2);
+        outside.addItem("Hammer", "A hammer", 13);
         outside.addItem("Stick", "A stick", 1);
         
         theater.setExit("west", outside);
@@ -139,6 +140,9 @@ public class Game
         }
         else if (commandWord.equals("drop")) {
             dropItem(command);
+        }
+        else if (commandWord.equals("items")) {
+            player.printItems();
         }
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
@@ -248,13 +252,20 @@ public class Game
             return;
         }
         List<Item> items = player.getCurrentRoom().getItems();
-        
+
         for (Item item : items)
         {
             if (item.getName().toLowerCase().equals(command.getSecondWord().toLowerCase()))
             {
-                player.pickUpItem(item);
-                player.getCurrentRoom().removeItem(item);
+                if (player.canTakeItem(item))
+                {
+                    player.pickUpItem(item);
+                    player.getCurrentRoom().removeItem(item);
+                }
+                else
+                {
+                    System.out.println("You can't carry any more items");
+                }
                 return;
             }
         }
